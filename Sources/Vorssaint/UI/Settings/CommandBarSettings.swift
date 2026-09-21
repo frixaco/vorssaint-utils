@@ -633,6 +633,8 @@ private struct CommandBarLinkEditor: View {
                         .foregroundStyle(.secondary)
                     Toggle(text.scriptRunsWithoutArgument, isOn: $draft.runsWithoutArgument)
                         .font(.caption)
+                    Toggle(text.scriptRunsDirectly, isOn: $draft.runsDirectly)
+                        .font(.caption)
                 }
             }
 
