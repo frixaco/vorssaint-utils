@@ -668,11 +668,11 @@ final class CommandBarService: ObservableObject {
             return
         }
         // A script marked to run directly does its work at once, with no
-        // argument and nothing on screen. The lookup rides behind the entry,
-        // so a hidden row or a switched-off Links source keeps its silence
-        // here too.
+        // argument and nothing on screen. Direct execution bypasses result
+        // filtering. Do nothing when the row is hidden or Links is disabled.
         if let link = CommandBarLinks.directRunScript(forStableKey: key, in: CommandBarLinks.decode(
             UserDefaults.standard.data(forKey: DefaultsKey.commandBarLinks))) {
+            guard !hiddenCache.contains(key), isEnabled(.links) else { return }
             CommandBarCatalog.runScriptDirectly(link)
             return
         }
